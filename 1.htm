@@ -1,0 +1,44 @@
+<!doctype html> 
+<html> 
+<head> 
+	<title>JS1k, 1k demo submission "Conway's Game of Life"</title> 
+	<meta charset="utf-8" /> 
+</head> 
+<body> 
+	<canvas id="c"></canvas> 
+	<script>
+(function(window, document) {
+	var canvas = document.body.children[0], context = canvas.getContext('2d'), map = [], size = 1e4, i = size, side = 450, hundred = 1e2, x, y, scale = 4;
+	canvas.height = canvas.width = side;
+	
+	while (i--) { map.push(Math.random() > .8 ? 1 : 0); }
+	
+	function count(cell) {
+		return check(cell -101) + check(cell -hundred) + check(cell -99) + check(cell -1) + check(cell +1) + check(cell +99) + check(cell +hundred) + check(cell +101);
+	}
+	function check(cell) {
+		return map[cell] || 0;
+	}
+	setInterval(function() {
+		next = map.slice(), i = size;
+		while (i--) {
+			x = count(i);
+			next[i] = x == 3 || (map[i] == 1 && x == 2) ? 1 : 0;
+		}
+		map = next;
+		context.clearRect(0, 0, side, side);
+
+		i = size;
+		while (i--) {
+			if (map[i] == 1) {
+				x = i / hundred
+				y = i % hundred;
+				context.fillRect(x *scale, y *scale, scale, scale);
+			}
+		}
+		context.fill();
+	}, 1e3);
+})(this, document);
+	</script>
+</body> 
+</html>
