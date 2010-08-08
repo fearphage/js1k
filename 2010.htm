@@ -22,8 +22,7 @@
 	setInterval(function() {
 		next = map.slice(), i = size;
 		while (i--) {
-			x = count(i);
-			next[i] = x == 3 || (map[i] == 1 && x == 2) ? 1 : 0;
+			next[x = count(i),i] = x == 3 || (map[i] == 1 && x == 2) ? 1 : 0;
 		}
 		map = next;
 		context.clearRect(0, 0, side, side);
