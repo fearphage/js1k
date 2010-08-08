@@ -8,7 +8,7 @@
 	<canvas id="c"></canvas> 
 	<script>
 (function(window, document) {
-	var canvas = document.body.children[0], context = canvas.getContext('2d'), map = [], size = 1e4, i = size, side = 450, hundred = 1e2, x, y, scale = 4;
+	var canvas = document.body.children[0], context = canvas.getContext('2d'), map = [], size = 1e4, i = size, scale = 4, hundred = 1e2, side = scale * hundred, x, y;
 	canvas.height = canvas.width = side;
 	
 	while (i--) { map.push(Math.random() > .8 ? 1 : 0); }
@@ -17,7 +17,7 @@
 		return check(cell -101) + check(cell -hundred) + check(cell -99) + check(cell -1) + check(cell +1) + check(cell +99) + check(cell +hundred) + check(cell +101);
 	}
 	function check(cell) {
-		return map[cell] || 0;
+		return map[cell]|0;
 	}
 	setInterval(function() {
 		next = map.slice(), i = size;
